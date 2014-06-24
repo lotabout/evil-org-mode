@@ -28,6 +28,7 @@
 ;; See, https://github.com/edwtjo/evil-org-mode/issues
 
 (require 'evil)
+(require 'evil-leader)
 (require 'org)
 
 (define-minor-mode evil-org-mode
@@ -67,16 +68,16 @@
   "T" '(lambda () (interactive) (evil-org-eol-call (lambda() (org-insert-todo-heading nil))))
   "H" 'org-beginning-of-line
   "L" 'org-end-of-line
-  ";t" 'org-show-todo-tree
-  "o" '(lambda () (interactive) (evil-org-eol-call 'always-insert-item))
-  "O" '(lambda () (interactive) (evil-org-eol-call 'org-insert-heading))
   "$" 'org-end-of-line
   "^" 'org-beginning-of-line
   "<" 'org-metaleft
   ">" 'org-metaright
-  ";a" 'org-agenda
   "-" 'org-cycle-list-bullet
   (kbd "TAB") 'org-cycle)
+
+(evil-leader/set-key
+  "t" 'org-show-todo-tree
+  "a" 'org-agenda)
 
 ;; normal & insert state shortcuts.
 (mapc (lambda (state)
